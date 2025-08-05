@@ -1,4 +1,6 @@
-# multi-agent-coordinator
+# Multi Agent Coordinator
+
+Planning and reconciliation for multi-agent systems.
 
 ![CI](https://github.com/TryKosm/multi-agent-coordinator/actions/workflows/ci.yml/badge.svg)
 
