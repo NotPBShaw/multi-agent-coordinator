@@ -2,40 +2,48 @@
 
 Planning and reconciliation for multi-agent systems.
 
-![CI](https://github.com/TryKosm/multi-agent-coordinator/actions/workflows/ci.yml/badge.svg)
-
-Planning and reconciliation framework for multi-agent task systems.
-
-[![CI](https://github.com/TryKosm/multi-agent-coordinator/actions/workflows/ci.yml/badge.svg)](https://github.com/TryKosm/multi-agent-coordinator/actions/workflows/ci.yml)
+[![CI](https://github.com/NotPBShaw/multi-agent-coordinator/actions/workflows/ci.yml/badge.svg)](https://github.com/NotPBShaw/multi-agent-coordinator/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+Allocate tasks across agents, detect conflicts, and persist coordination state.
 
 ## Why this exists
 
-Open-source building block for production AI workflows.
+Multi-agent systems need a coordination layer that tracks assignments and reconciles overlapping work — not just a message bus.
 
 ## Quickstart
 
-
-tbd
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -e .
+python -c "from coordinator.cli import run; run()"
+cat state/run.json
+```
 
 ## Usage
 
-Add a concise runnable example for the main workflow in this repository.
+```python
+from coordinator.models import Task
+from coordinator.planner import plan
+from coordinator.reconcile import reconcile
+
+ordered = plan([Task("t1", "research", 2), Task("t2", "draft", 1)])
+print(reconcile(["t1"]))
+```
 
 ## Architecture
 
-Document the core components and data flow for this project.
-
-## Roadmap
-
-- [ ] Stabilize v0.1 contract and improve docs
-- [ ] Expand test coverage and CI signals
-- [ ] Add one benchmark or reliability metric
+- `planner.py` — task decomposition and ordering
+- `allocator.py` — agent assignment logic
+- `conflicts.py` — overlap detection between agent claims
+- `state.py` — JSON state persistence
 
 ## Development
 
-- Run tests locally before opening a PR.
-- Keep changes scoped and update docs for API/behavior changes.
+```bash
+make check
+pytest -q
+```
 
 ## License
 
